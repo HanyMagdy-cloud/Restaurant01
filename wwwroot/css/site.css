@@ -1,0 +1,153 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
+  color: var(--bs-secondary-color);
+  text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
+  text-align: start;
+}
+
+/* Make a section stretch full viewport width even inside a .container layout */
+.full-bleed {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+}
+
+/* Hero background using your image + 50% contrast */
+.hero {
+    position: relative;
+    min-height: 100vh; /* full screen height */
+    overflow: hidden;
+}
+
+    /* Background layer */
+    .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: url("/images/restaurant-history.jpg") center center / cover no-repeat fixed;
+        filter: contrast(0.5); /* 50% contrast */
+        z-index: 0;
+    }
+
+    /* Optional: add a subtle dark overlay so text pops */
+    .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0,0,0,0.35);
+        z-index: 0;
+    }
+
+/* Foreground content */
+.hero-content {
+    position: relative;
+    z-index: 1;
+    color: #fff;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+    padding: 2rem;
+}
+
+/* Reservation background */
+.reservation-hero {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+    .reservation-hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: url("/images/restaurant-history.jpg") center center / cover no-repeat fixed;
+        filter: contrast(0.5);
+        z-index: 0;
+    }
+
+    .reservation-hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4); /* darker overlay for readability */
+        z-index: 0;
+    }
+
+/* Form card styling */
+.reservation-form {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 1rem;
+}
+/* Filter pills look */
+.filters_menu .nav-link {
+    cursor: pointer;
+    border-radius: 2rem;
+    padding: 0.4rem 1rem;
+    margin: 0 .25rem;
+    color: #0d6efd;
+    border: 1px solid #0d6efd;
+    transition: all .2s ease;
+}
+
+    .filters_menu .nav-link.active,
+    .filters_menu .nav-link:hover {
+        background: #0d6efd;
+        color: #fff;
+    }
+
+/* Cards + images */
+.menu-card .img-box {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+    border-top-left-radius: .5rem;
+    border-top-right-radius: .5rem;
+}
+
+    .menu-card .img-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+.menu-card.box {
+    border-radius: .5rem;
+    background: #fff;
+}
+
+/* Optional subtle hover */
+.menu-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 .75rem 1.25rem rgba(0,0,0,.08) !important;
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+

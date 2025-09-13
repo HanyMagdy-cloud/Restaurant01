@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Welcome";
+}
+
+<!-- Full-bleed hero -->
+<section class="hero full-bleed d-flex align-items-center justify-content-center text-center">
+    <div class="hero-content">
+        <h1 class="display-4 fw-bold mb-3">Welcome to Jensen Restaurant</h1>
+        <p class="lead mb-4">Pasta, burgers, pizza, and fries made fresh—every day.</p>
+
+        <div>
+            <a asp-controller="Menu" asp-action="Index" class="btn btn-primary btn-lg me-2">View Menu</a>
+            <a asp-controller="Reservations" asp-action="Create" class="btn btn-outline-light btn-lg">Book a Table</a>
+        </div>
+    </div>
+</section>

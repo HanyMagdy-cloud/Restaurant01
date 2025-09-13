@@ -1,0 +1,12 @@
+﻿@model Restaurant01.Models.Reservation
+@{
+    ViewData["Title"] = "Thank you";
+}
+<div class="text-center py-5">
+    <h1 class="mb-3">Thanks, @Model.CustomerName!</h1>
+    <p>
+        Your table for <strong>@Model.PartySize</strong> is booked on
+        <strong>@Model.ReservationTime</strong>.
+    </p>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-secondary mt-3">Back to Home</a>
+</div>

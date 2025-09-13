@@ -1,0 +1,40 @@
+﻿@model Restaurant01.Models.Reservation
+@{
+    ViewData["Title"] = "Book a Table";
+}
+
+<section class="reservation-hero d-flex align-items-center justify-content-center">
+    <div class="card shadow-lg p-4 reservation-form">
+        <h1 class="text-center mb-4">Book a Table</h1>
+
+        <form asp-action="Create" method="post" class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label">Name</label>
+                <input asp-for="CustomerName" class="form-control" />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Email</label>
+                <input asp-for="Email" class="form-control" />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Phone</label>
+                <input asp-for="Phone" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Number of Customers</label>
+                <input asp-for="PartySize" type="number" class="form-control" />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Reservation Time</label>
+                <input asp-for="ReservationTime" type="datetime-local" class="form-control" />
+            </div>
+            <div class="col-12">
+                <label class="form-label">Special Requests</label>
+                <textarea asp-for="SpecialRequests" class="form-control" rows="3"></textarea>
+            </div>
+            <div class="col-12 text-center">
+                <button type="submit" class="btn btn-primary btn-lg px-5">Book</button>
+            </div>
+        </form>
+    </div>
+</section>

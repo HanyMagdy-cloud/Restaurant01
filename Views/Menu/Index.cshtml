@@ -1,0 +1,130 @@
+﻿@* @model IEnumerable<Restaurant01.Models.MenuItem>
+@{
+    ViewData["Title"] = "Menu";
+}
+
+<h1 class="mb-4">Menu</h1>
+
+<div class="row g-4">
+    @foreach (var item in Model)
+    {
+        <div class="col-12 col-sm-6 col-lg-3">
+            <div class="card h-100">
+                <img class="card-img-top" src="~/images/menu/@item.ImageFileName" alt="@item.Name" />
+                <div class="card-body">
+                    <h5 class="card-title">@item.Name</h5>
+                    @if (!string.IsNullOrWhiteSpace(item.Description))
+                    {
+                        <p class="card-text text-muted">@item.Description</p>
+                    }
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="fw-bold">@item.Price.ToString("C")</span>
+                        <span class="badge bg-secondary">@item.Category</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+ *@
+
+@model IEnumerable<Restaurant01.Models.MenuItem>
+@{
+    ViewData["Title"] = "Our Menu";
+    string Slug(string? s) =>
+        string.IsNullOrWhiteSpace(s) ? "uncategorized"
+        : new string(s.ToLowerInvariant()
+            .Replace("&", "and")
+            .Replace(" ", "-")
+            .Where(ch => char.IsLetterOrDigit(ch) || ch == '-')
+            .ToArray());
+    var categories = Model?
+        .Where(m => !string.IsNullOrWhiteSpace(m.Category))
+        .Select(m => m.Category!.Trim())
+        .Distinct(StringComparer.OrdinalIgnoreCase)
+        .OrderBy(c => c)
+        .ToList() ?? new List<string>();
+}
+
+<div class="container py-5">
+    <div class="heading_container heading_center text-center mb-4">
+        <h2 class="fw-bold">Our Menu</h2>
+        <p class="text-muted">Pick a category to filter</p>
+    </div>
+
+    <!-- Filter pills -->
+    <ul class="filters_menu nav justify-content-center mb-4">
+        <li class="nav-item">
+            <button class="nav-link active filter-btn" data-filter="*">All</button>
+        </li>
+        @foreach (var cat in categories)
+        {
+            <li class="nav-item">
+                <button class="nav-link filter-btn" data-filter=".@Slug(cat)">@cat</button>
+            </li>
+        }
+    </ul>
+
+    <!-- Grid -->
+    <div class="filters-content">
+        @if (Model == null || !Model.Any())
+        {
+            <div class="text-center text-muted py-5">No menu items yet. Add some in the database.</div>
+        }
+        else
+        {
+            <div class="row g-4 grid">
+                @foreach (var item in Model)
+                {
+                    var cls = Slug(item.Category);
+                    <div class="col-sm-6 col-lg-4 grid-item all @cls">
+                        <div class="menu-card box h-100 shadow-sm">
+                            <div class="img-box">
+                                <img src="~/images/menu/@item.ImageFileName" alt="@item.Name" class="img-fluid" />
+                            </div>
+                            <div class="detail-box p-3">
+                                <h5 class="mb-1">@item.Name</h5>
+                                @if (!string.IsNullOrWhiteSpace(item.Description))
+                                {
+                                    <p class="text-muted small mb-2">@item.Description</p>
+                                }
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h6 class="m-0 fw-bold">@item.Price.ToString("C")</h6>
+                                    <span class="badge bg-secondary text-uppercase">@item.Category</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+
+    <div class="text-center mt-4">
+        <a asp-controller="Menu" asp-action="Index" class="btn btn-outline-primary">View More</a>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Simple client-side filter (no external libraries)
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // active state
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.dataset.filter; // e.g. "*" or ".pizza"
+                const items = document.querySelectorAll('.grid .grid-item');
+
+                items.forEach(card => {
+                    if (filter === '*' || card.matches(filter)) {
+                        card.classList.remove('d-none');
+                    } else {
+                        card.classList.add('d-none');
+                    }
+                });
+            });
+        });
+    </script>
+}
